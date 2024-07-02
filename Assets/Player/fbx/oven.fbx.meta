@@ -3,77 +3,7 @@ guid: 5a590f72f9eeeff42a80d9b7c8b4aba7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Rim
-    second: {fileID: 2100000, guid: ba744ed791c90e941aad3c9521c3c56e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Tire
-    second: {fileID: 2100000, guid: cd0d81360fb92b2478ef64414cbc4273, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: balalaika
-    second: {fileID: 2100000, guid: 18223a282890b6249b47850b0118b3f9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bricks
-    second: {fileID: 2100000, guid: a8ca46699aba7e6429d858af5ef48e94, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: fire
-    second: {fileID: 2100000, guid: 72d81629fa0e8ef46b38a0c5d1e5f748, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: 337a88d23294af84d8fb2a158f34854e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: log
-    second: {fileID: 2100000, guid: 8acade0ddecfbd547bd70a517fefbf80, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: log2
-    second: {fileID: 2100000, guid: ad2ee0d5e21e2b7479e6d9450e290d1b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: metal
-    second: {fileID: 2100000, guid: 21c252d5daf1c2b48853279e4473c5ec, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: IzbaFabricsURP_AlbedoTransparency
-    second: {fileID: 2800000, guid: eeed977b353e6644482cd8b565590964, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: IzbaFabricsURP_Normal
-    second: {fileID: 2800000, guid: b7bb52ec412f4f744811a6e3d069e4e6, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: balalaika_Base_Color
-    second: {fileID: 2800000, guid: 1f2ab05433daeff43bccbf68d9901785, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: bricks
-    second: {fileID: 2800000, guid: 91df771afab93d84d886f05a1f616067, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: fire
-    second: {fileID: 2800000, guid: c12f2359f960cbd45b67bd905290e85d, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
