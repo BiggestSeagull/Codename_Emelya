@@ -7,9 +7,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Slider moveSlider;
     [SerializeField] private GameObject player;
 
-    // Border positions
-    [SerializeField] private Vector3 leftBorder = new(-6.5f, 0f, 0f);
-    [SerializeField] private Vector3 rightBorder = new(6.5f, 0f, 0f);
+    // Border positions; left border is getting as -border
+    [SerializeField] private Vector3 border = new(6.5f, 0f, 0f);
 
     private bool exitCourutine; // TODO move to GameMAnager
 
@@ -38,8 +37,8 @@ public class PlayerMove : MonoBehaviour
 
     private void PlayerMovement()
     {
-        // Turns depending on interpolated slider value
-        player.transform.position = Vector3.Lerp(leftBorder, rightBorder, moveSlider.value);
+        // Player pos depends on interpolation by slider value and between borders
+        player.transform.position = Vector3.Lerp(-border, border, moveSlider.value);
     }
 
     private IEnumerator CountTurnSpeed()
@@ -54,12 +53,12 @@ public class PlayerMove : MonoBehaviour
             if (posNow.x < posBefore.x)
             {
                 // Left
-                normalizedSpeed = -Mathf.Clamp(turnSpeed, 0f, 1f);
+                normalizedSpeed = -Mathf.Clamp(turnSpeed, 0f, 10f);
             }
             else
             {
                 // Right
-                normalizedSpeed = Mathf.Clamp(turnSpeed, 0f, 1f);
+                normalizedSpeed = Mathf.Clamp(turnSpeed, 0f, 10f);
             }
 
             // Turn speed
