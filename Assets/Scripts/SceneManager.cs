@@ -22,4 +22,8 @@ public class SceneManager : MonoBehaviour
     {
         moveSlider.onValueChanged.AddListener(StartGame);
     }
+    private void OnDisable()
+    {
+        moveSlider.onValueChanged.RemoveListener(StartGame);
+    }
 }
