@@ -10,29 +10,26 @@ public class PlayerMove : MonoBehaviour
     // Border positions; left border is getting as -border
     [SerializeField] private Vector3 border = new(6.5f, 0f, 0f);
 
-    private bool exitCourutine; // TODO move to GameMAnager
-
     // Coroutines variables
     [SerializeField] private float checkPosFrequency = 0.05f;
     private Vector3 posBefore;
     private Vector3 posNow;
     private float turnSpeed;
-    public static float normalizedSpeed;
+    public static float normalizedSpeed; // Also used in PlayerAnim.cs
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine(CountTurnSpeed());
-
-        player.transform.position = new(0f, 0f, 0f);
-
-
-    }
 
     // Update is called once per frame
     void Update()
     {
         PlayerMovement();
+    }
+    private void OnEnable()
+    {
+        StartCoroutine(CountTurnSpeed());
+    }
+    private void OnDisable()
+    {
+        StopCoroutine(CountTurnSpeed());
     }
 
     private void PlayerMovement()
@@ -43,10 +40,10 @@ public class PlayerMove : MonoBehaviour
 
     private IEnumerator CountTurnSpeed()
     {
-        while(exitCourutine == false)
+        while(true)
         {
             posBefore = player.transform.position;
-            yield return new WaitForSecondsRealtime(checkPosFrequency);
+            yield return new WaitForSeconds(checkPosFrequency);
             posNow = player.transform.position;
 
             // Turn direction
@@ -65,6 +62,5 @@ public class PlayerMove : MonoBehaviour
             turnSpeed = Vector3.Distance(posBefore, posNow);
             yield return null; // Wait for the next frame
         }
-        StopCoroutine(CountTurnSpeed());
     }
 }
