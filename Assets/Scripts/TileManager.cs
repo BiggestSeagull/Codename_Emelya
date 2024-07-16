@@ -6,7 +6,7 @@ public class TileManager : MonoBehaviour
     [SerializeField] private float speedMultiplier;
 
     private Vector3 firstPos = new(0f, -1.7f, 0f);
-    private bool startTheGame;
+    private bool isGameStarted;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (startTheGame)
+        if (isGameStarted)
         {
             MoveTiles();
 
@@ -27,18 +27,17 @@ public class TileManager : MonoBehaviour
     // Sub/unsub on player interaction with move slider
     private void OnEnable()
     {
-        SceneManager.OnSliderPressed += StartTheGame;
+        SceneManager.OnSliderPressed += GameHasStarted;
     }
     private void OnDisable()
     {
-        SceneManager.OnSliderPressed -= StartTheGame;
+        SceneManager.OnSliderPressed -= GameHasStarted;
     }
 
-    private void StartTheGame()
+    private void GameHasStarted()
     {
         // Enable Update()
-        Debug.Log("Game is started");
-        startTheGame = true;
+        isGameStarted = true;
     }
 
 
