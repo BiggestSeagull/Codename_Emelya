@@ -10,7 +10,7 @@ public class UiManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentWood.text = "Дрова: \n" + PlayerStats.currentFuel.ToString();
     }
 
     // Update is called once per frame
@@ -19,8 +19,8 @@ public class UiManager : MonoBehaviour
         
     }
 
-    private void WoodUpdate(int addWood)
+    public void WoodUpdate()
     {
-        currentWood.text = "Дрова: \n" + addWood.ToString();
+        currentWood.text = "Дрова: \n" + PlayerStats.currentFuel.ToString();
     }
 }

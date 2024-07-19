@@ -7,10 +7,9 @@ public class SceneManager : MonoBehaviour
     [SerializeField] private Slider moveSlider;
     public static event Action OnSliderPressed;
 
-    // Script for slider on value change
+    // Method for slider. On value changed game will be started
     public void StartGame(float value)
     {
-        Debug.Log("Trigger SceneManager");
         // Check if there is subscribers and launching
         OnSliderPressed?.Invoke();
 

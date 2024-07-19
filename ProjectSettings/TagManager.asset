@@ -4,8 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Fuel
   - SceneManager
+  - Fuel_1
+  - Fuel_3
+  - Fuel_4
+  - Fuel
   layers:
   - Default
   - TransparentFX

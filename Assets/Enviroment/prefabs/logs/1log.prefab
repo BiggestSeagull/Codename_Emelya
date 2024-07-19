@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6177588011302370463}
   m_Layer: 0
   m_Name: 1log
-  m_TagString: Fuel
+  m_TagString: Fuel_1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

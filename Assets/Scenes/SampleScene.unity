@@ -901,6 +901,12 @@ MonoBehaviour:
   - {fileID: 1252372511392261223, guid: ac008a090efeb674b8f495c30a5f0ebf, type: 3}
   - {fileID: 8510376442340889555, guid: 812a3656fbb8aa14fb4a5e0da7eb8854, type: 3}
   - {fileID: 4668136597808764497, guid: 10c1b5218aa842043a1d316b1d4afda8, type: 3}
+  - {fileID: 5155995554605995609, guid: 6c61396f148cccc4d88128fd764d004c, type: 3}
+  - {fileID: 5155995554605995609, guid: 975516bb9ef58844d8c0cd65b4b7a111, type: 3}
+  - {fileID: 5155995554605995609, guid: 448aa54a260570c4d99f8f8a93f78b35, type: 3}
+  - {fileID: 5155995554605995609, guid: c31ef583398abe04db641cbc4ace5472, type: 3}
+  - {fileID: 5155995554605995609, guid: ecf824b84e2511240a56f3285fb08769, type: 3}
+  - {fileID: 5155995554605995609, guid: 94ed40e4517201e49848be0fbe0838a8, type: 3}
   speedMultiplier: 20
 --- !u!4 &1750663955
 Transform:
@@ -1333,6 +1339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf871bfc29420b4795509b5d05b50c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 2110555289}
 --- !u!54 &2037358344332243278
 Rigidbody:
   m_ObjectHideFlags: 0
