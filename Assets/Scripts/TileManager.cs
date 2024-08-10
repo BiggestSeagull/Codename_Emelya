@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
+    [SerializeField] private GameObject firstTile;
     [SerializeField] private GameObject[] possibleTiles;
     [SerializeField] private float speedMultiplier;
 
     private Vector3 firstPos = new(0f, -1.7f, 0f);
-    private bool startTheGame;
+    private bool isGameStarted;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,7 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (startTheGame)
+        if (isGameStarted)
         {
             MoveTiles();
 
@@ -27,24 +28,23 @@ public class TileManager : MonoBehaviour
     // Sub/unsub on player interaction with move slider
     private void OnEnable()
     {
-        SceneManager.OnSliderPressed += StartTheGame;
+        SceneManager.OnSliderPressed += GameHasStarted;
     }
     private void OnDisable()
     {
-        SceneManager.OnSliderPressed -= StartTheGame;
+        SceneManager.OnSliderPressed -= GameHasStarted;
     }
 
-    private void StartTheGame()
+    private void GameHasStarted()
     {
         // Enable Update()
-        Debug.Log("Game is started");
-        startTheGame = true;
+        isGameStarted = true;
     }
 
 
     private void SetFirstTile()
     {
-        GameObject _newTile = Instantiate(possibleTiles[Random.Range(0, possibleTiles.Length)], firstPos, Quaternion.identity, transform);
+        Instantiate(firstTile, firstPos, Quaternion.identity, transform);
         
         SetNextTile();
         SetNextTile();
@@ -53,10 +53,30 @@ public class TileManager : MonoBehaviour
 
     private void SetNextTile()
     {
+        // Getting position for new tile
         Vector3 _afterLastPos = transform.GetChild(transform.childCount - 1).position;
         _afterLastPos.z += 30f;
 
-        GameObject _newTile = Instantiate(possibleTiles[Random.Range(0, possibleTiles.Length)], _afterLastPos, Quaternion.identity, transform);
+        // Trying to flip tile by 180 degrees
+        if (TryFlip(50) == true) 
+        {
+            // To flip creating new vector and transforming to Quaternion with Quaternion.Euler
+            Vector3 targetedRotation = new (0f, 180f, 0f);
+            GameObject _newTile = Instantiate(possibleTiles[Random.Range(0, possibleTiles.Length)], _afterLastPos, Quaternion.Euler(targetedRotation), transform);
+        }
+        else
+        {
+            GameObject _newTile = Instantiate(possibleTiles[Random.Range(0, possibleTiles.Length)], _afterLastPos, Quaternion.identity, transform);
+        }
+            
+    }
+
+    private bool TryFlip(int chanceToFlip)
+    {
+        int randomValue = Random.Range(0, 101);
+
+        if (chanceToFlip >= randomValue) return true;
+        else return false;
     }
 
     private void MoveTiles()
