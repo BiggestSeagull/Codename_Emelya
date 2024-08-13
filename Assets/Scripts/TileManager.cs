@@ -9,6 +9,10 @@ public class TileManager : MonoBehaviour
     private Vector3 firstPos = new(0f, -1.7f, 0f);
     private bool isGameStarted;
 
+    // Start value is 0
+    public int tilesCount = 0;
+    public int tilesCountToEnd = 15;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,16 +27,23 @@ public class TileManager : MonoBehaviour
             MoveTiles();
 
         }
+        if (tilesCount >= tilesCountToEnd) 
+        {
+
+        }
     }
 
     // Sub/unsub on player interaction with move slider
     private void OnEnable()
     {
         SceneManager.OnSliderPressed += GameHasStarted;
+        SceneManager.OnEndGame += GameHasEnded;
     }
     private void OnDisable()
     {
         SceneManager.OnSliderPressed -= GameHasStarted;
+        SceneManager.OnEndGame -= GameHasEnded;
+
     }
 
     private void GameHasStarted()
@@ -41,11 +52,17 @@ public class TileManager : MonoBehaviour
         isGameStarted = true;
     }
 
+    private void GameHasEnded()
+    {
+
+    }
+
 
     private void SetFirstTile()
     {
+        tilesCount += 1;
+
         Instantiate(firstTile, firstPos, Quaternion.identity, transform);
-        
         SetNextTile();
         SetNextTile();
         SetNextTile();
@@ -53,6 +70,8 @@ public class TileManager : MonoBehaviour
 
     private void SetNextTile()
     {
+        tilesCount += 1;
+
         // Getting position for new tile
         Vector3 _afterLastPos = transform.GetChild(transform.childCount - 1).position;
         _afterLastPos.z += 30f;
@@ -62,11 +81,11 @@ public class TileManager : MonoBehaviour
         {
             // To flip creating new vector and transforming to Quaternion with Quaternion.Euler
             Vector3 targetedRotation = new (0f, 180f, 0f);
-            GameObject _newTile = Instantiate(possibleTiles[Random.Range(0, possibleTiles.Length)], _afterLastPos, Quaternion.Euler(targetedRotation), transform);
+            Instantiate(possibleTiles[Random.Range(0, possibleTiles.Length)], _afterLastPos, Quaternion.Euler(targetedRotation), transform);
         }
         else
         {
-            GameObject _newTile = Instantiate(possibleTiles[Random.Range(0, possibleTiles.Length)], _afterLastPos, Quaternion.identity, transform);
+            Instantiate(possibleTiles[Random.Range(0, possibleTiles.Length)], _afterLastPos, Quaternion.identity, transform);
         }
             
     }

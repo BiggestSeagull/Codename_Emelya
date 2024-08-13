@@ -9,6 +9,7 @@ TagManager:
   - Fuel_3
   - Fuel_4
   - Fuel
+  - PuzzleBonus
   layers:
   - Default
   - TransparentFX
