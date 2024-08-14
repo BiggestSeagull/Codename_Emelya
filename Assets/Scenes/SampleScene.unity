@@ -918,7 +918,7 @@ MonoBehaviour:
   - {fileID: 316016792817679690, guid: a237c775984da7548a83907a0f635dd7, type: 3}
   - {fileID: 7080801743121928523, guid: 03fefe595d0c02a49986d34787d0e077, type: 3}
   - {fileID: 7104412918170676908, guid: ea0688836d910fd44a3cb8f9db5aa746, type: 3}
-  speedMultiplier: 10
+  scoreTrigger: {fileID: 5155995554605995609, guid: 3af087012fcae554ea7b1b67f2a4a1ea, type: 3}
 --- !u!4 &1750663955
 Transform:
   m_ObjectHideFlags: 0
@@ -1256,6 +1256,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8667002795593059608, guid: df11e1dc314aa6846ae4bd4a6dfab2c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2037358344332243277}
+    - targetCorrespondingSourceObject: {fileID: 8667002795593059608, guid: df11e1dc314aa6846ae4bd4a6dfab2c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2037358344332243279}
   m_SourcePrefab: {fileID: 100100000, guid: df11e1dc314aa6846ae4bd4a6dfab2c3, type: 3}
 --- !u!1 &2037358344332243268 stripped
 GameObject:
@@ -1378,6 +1381,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &2037358344332243279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037358344332243268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64eac36239beae4da1ca5b2febc1343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

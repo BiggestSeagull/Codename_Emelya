@@ -4,7 +4,8 @@ public class TileManager : MonoBehaviour
 {
     [SerializeField] private GameObject firstTile;
     [SerializeField] private GameObject[] possibleTiles;
-    [SerializeField] private float speedMultiplier;
+
+    [SerializeField] private GameObject scoreTrigger;
 
     private Vector3 firstPos = new(0f, -1.7f, 0f);
     private bool isGameStarted;
@@ -13,6 +14,7 @@ public class TileManager : MonoBehaviour
     void Start()
     {
         SetFirstTile();
+        SetAllTiles(SceneManager.gameLenght);
     }
 
     // Update is called once per frame
@@ -21,7 +23,6 @@ public class TileManager : MonoBehaviour
         if (isGameStarted)
         {
             MoveTiles();
-
         }
     }
 
@@ -41,34 +42,44 @@ public class TileManager : MonoBehaviour
         isGameStarted = true;
     }
 
-
     private void SetFirstTile()
     {
         Instantiate(firstTile, firstPos, Quaternion.identity, transform);
-        
-        SetNextTile();
-        SetNextTile();
-        SetNextTile();
     }
 
-    private void SetNextTile()
+    private void SetAllTiles(int gameLenght)
     {
-        // Getting position for new tile
+        for (int i = 0; i < gameLenght; i++)
+        {
+            // Getting position for new tile
+            Vector3 _afterLastPos = transform.GetChild(transform.childCount - 1).position;
+            _afterLastPos.z += 30f;
+
+            // Trying to flip tile by 180 degrees
+            if (TryFlip(50) == true) 
+            {
+                // To flip creating new vector and transforming to Quaternion with Quaternion.Euler
+                Vector3 targetedRotation = new (0f, 180f, 0f);
+
+                GameObject _newTile = Instantiate(possibleTiles[Random.Range(0, possibleTiles.Length)], _afterLastPos, Quaternion.Euler(targetedRotation), transform);
+            }
+            else
+            {
+                GameObject _newTile = Instantiate(possibleTiles[Random.Range(0, possibleTiles.Length)], _afterLastPos, Quaternion.identity, transform);
+            }
+        }
+
+        // After all tiles set trigger to start score counting
+        SetScoringTrigger();
+    }
+
+    private void SetScoringTrigger()
+    {
+        // Trigger placed right after last tile
         Vector3 _afterLastPos = transform.GetChild(transform.childCount - 1).position;
         _afterLastPos.z += 30f;
 
-        // Trying to flip tile by 180 degrees
-        if (TryFlip(50) == true) 
-        {
-            // To flip creating new vector and transforming to Quaternion with Quaternion.Euler
-            Vector3 targetedRotation = new (0f, 180f, 0f);
-            GameObject _newTile = Instantiate(possibleTiles[Random.Range(0, possibleTiles.Length)], _afterLastPos, Quaternion.Euler(targetedRotation), transform);
-        }
-        else
-        {
-            GameObject _newTile = Instantiate(possibleTiles[Random.Range(0, possibleTiles.Length)], _afterLastPos, Quaternion.identity, transform);
-        }
-            
+        GameObject _scoreTrigger = Instantiate(scoreTrigger, _afterLastPos, Quaternion.identity, transform);
     }
 
     private bool TryFlip(int chanceToFlip)
@@ -86,14 +97,13 @@ public class TileManager : MonoBehaviour
             if (tile != null)
             {
                 Vector3 _position = tile.transform.position;
-                _position.z -= Time.deltaTime * speedMultiplier;
+                _position.z -= Time.deltaTime * SceneManager.gameSpeedMultiplier;
                 tile.transform.position = _position;
 
                 // Destroy if out of sight
                 if (tile.transform.position.z <= -30f)
                 {
                     Destroy(tile.gameObject);
-                    SetNextTile();
                 } 
                     
             }
