@@ -9,11 +9,12 @@ public class SceneManager : MonoBehaviour
     public static event Action OnSliderPressed;
 
     // Tiles control
-    public static int gameLenght = 15;    // Tiles count for lenght of game
+    public static int gameLenght = 5;    // Tiles count for lenght of game
     public static float gameSpeedMultiplier = 15f; // Speed of tiles move
 
     // Endgame management
     public static event Action OnGameEnded;
+    public static int thisGameScore; // Counted in EndgameScore
 
     // Method for slider. On value changed game will be started
     public void StartGame(float value)
