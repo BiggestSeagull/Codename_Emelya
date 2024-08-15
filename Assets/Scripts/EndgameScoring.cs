@@ -6,14 +6,17 @@ public class EndgameScoring : MonoBehaviour
 {
     [SerializeField] private UiManager uiManager;
 
+    private void OnDisable()
+    {
+        StopCoroutine(Scoring());
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("StartScoringTrigger"))
         {
             Destroy(other.gameObject);
 
-            // Send command to activate trigger (event) in SM.cs
-            SceneManager.EndGame();
             StartCoroutine(Scoring());
         }
     }
@@ -34,13 +37,13 @@ public class EndgameScoring : MonoBehaviour
             switch (speed)
             {
                 case > 0.4f:
-                    speed -= 0.1f; // Decrease speed faster when it's above 0.3
+                    speed -= 0.1f; // Decrease speed faster when it's above 0.4
                     break;
                 case > 0.2f:
-                    speed -= 0.06f; // Decrease speed faster when it's above 0.3
+                    speed -= 0.06f; // Decrease speed faster when it's above 0.2
                     break;
                 case > 0.06f:
-                    speed -= 0.03f; // Decrease speed slower when it's above 0.12
+                    speed -= 0.03f; // Decrease speed slower when it's above 0.06
                     break;
             }
             yield return new WaitForSeconds(speed);
@@ -48,6 +51,10 @@ public class EndgameScoring : MonoBehaviour
 
         int scoreBonus = Random.Range(9, 21);
         SceneManager.thisGameScore = playerScore + scoreBonus;
+
+        // Call UI
+        // Send command to activate trigger (event) in SM.cs
+        SceneManager.EndGame();
 
         yield return null;
     }

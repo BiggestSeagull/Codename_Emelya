@@ -1,11 +1,8 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SceneManager : MonoBehaviour
 {
-    // UI slider for movement
-    [SerializeField] private Slider moveSlider;
     public static event Action OnSliderPressed;
 
     // Tiles control
@@ -17,16 +14,16 @@ public class SceneManager : MonoBehaviour
     public static int thisGameScore; // Counted in EndgameScore
 
     // Method for slider. On value changed game will be started
-    public void StartGame(float value)
+    public static void StartGame(float value)
     {
         // Check if there is subscribers and launching
         OnSliderPressed?.Invoke();
 
         // Unsubscribe to prevert spamming this void
-        moveSlider.onValueChanged.RemoveListener(StartGame);
+        GameObject.FindGameObjectWithTag("SceneManager").GetComponent<UiManager>().SliderRemoveListener();
     }
     
-    // This called once when need to end the game
+    // This called once when need to end the game. Now it`s ends after scoring
     public static void EndGame()
     {
         OnGameEnded?.Invoke();
@@ -41,14 +38,5 @@ public class SceneManager : MonoBehaviour
         //{
         //    SceneManager.OnGameEnded -= egGameHasEnded;
         //}
-    }
-
-    private void OnEnable()
-    {
-        moveSlider.onValueChanged.AddListener(StartGame);
-    }
-    private void OnDisable()
-    {
-        moveSlider.onValueChanged.RemoveListener(StartGame);
     }
 }
