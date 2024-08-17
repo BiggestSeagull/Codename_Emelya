@@ -14,7 +14,7 @@ public class TileManager : MonoBehaviour
     void Start()
     {
         SetFirstTile();
-        SetAllTiles(SceneManager.gameLenght);
+        SetAllTiles(GameManager.gameLenght);
     }
 
     // Update is called once per frame
@@ -29,11 +29,11 @@ public class TileManager : MonoBehaviour
     // Sub/unsub on player interaction with move slider
     private void OnEnable()
     {
-        SceneManager.OnSliderPressed += GameHasStarted;
+        GameManager.OnSliderPressed += GameHasStarted;
     }
     private void OnDisable()
     {
-        SceneManager.OnSliderPressed -= GameHasStarted;
+        GameManager.OnSliderPressed -= GameHasStarted;
     }
 
     private void GameHasStarted()
@@ -97,7 +97,7 @@ public class TileManager : MonoBehaviour
             if (tile != null)
             {
                 Vector3 _position = tile.transform.position;
-                _position.z -= Time.deltaTime * SceneManager.gameSpeedMultiplier;
+                _position.z -= Time.deltaTime * GameManager.gameSpeedMultiplier;
                 tile.transform.position = _position;
 
                 // Destroy if out of sight

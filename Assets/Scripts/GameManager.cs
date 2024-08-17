@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public static event Action OnSliderPressed;
 
@@ -12,6 +13,7 @@ public class SceneManager : MonoBehaviour
     // Endgame management
     public static event Action OnGameEnded;
     public static int thisGameScore; // Counted in EndgameScore
+    public static int tempUntillNoYaGames = 30;
 
     // Method for slider. On value changed game will be started
     public static void StartGame(float value)
@@ -22,7 +24,7 @@ public class SceneManager : MonoBehaviour
         // Unsubscribe to prevert spamming this void
         GameObject.FindGameObjectWithTag("SceneManager").GetComponent<UiManager>().SliderRemoveListener();
     }
-    
+
     // This called once when need to end the game. Now it`s ends after scoring
     public static void EndGame()
     {
@@ -38,5 +40,16 @@ public class SceneManager : MonoBehaviour
         //{
         //    SceneManager.OnGameEnded -= egGameHasEnded;
         //}
+    }
+
+    public static bool IsNeedToShowNewScore()
+    {
+        if (thisGameScore > tempUntillNoYaGames) return true;
+        else return false;
+    }
+
+    public static void ReloadScene()
+    {
+        SceneManager.LoadScene(0);
     }
 }

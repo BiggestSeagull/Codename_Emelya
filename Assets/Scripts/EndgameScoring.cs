@@ -50,11 +50,11 @@ public class EndgameScoring : MonoBehaviour
         }
 
         int scoreBonus = Random.Range(9, 21);
-        SceneManager.thisGameScore = playerScore + scoreBonus;
+        GameManager.thisGameScore = playerScore + scoreBonus;
 
         // Call UI
         // Send command to activate trigger (event) in SM.cs
-        SceneManager.EndGame();
+        GameManager.EndGame();
 
         yield return null;
     }

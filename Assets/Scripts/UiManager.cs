@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 
 public class UiManager : MonoBehaviour
 {
@@ -13,6 +12,10 @@ public class UiManager : MonoBehaviour
 
     // After score is counted show this
     [SerializeField] private GameObject EndgameUi;
+    [SerializeField] private GameObject NewScore;
+    [SerializeField] private TextMeshProUGUI currentScore;
+    [SerializeField] private TextMeshProUGUI bestScore;
+    [SerializeField] private Button newGame;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +23,8 @@ public class UiManager : MonoBehaviour
         currentWood.text = "ƒрова: \n" + PlayerStats.currentFuel.ToString();
 
         // To ensure correct state
-        EndgameUi.SetActive(false); 
+        EndgameUi.SetActive(false);
+        NewScore.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,21 +35,21 @@ public class UiManager : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneManager.OnGameEnded += EndGame;
+        GameManager.OnGameEnded += EndGame;
 
-        moveSlider.onValueChanged.AddListener(SceneManager.StartGame);
+        moveSlider.onValueChanged.AddListener(GameManager.StartGame);
     }
     private void OnDisable()
     {
-        SceneManager.OnGameEnded -= EndGame;
+        GameManager.OnGameEnded -= EndGame;
 
-        moveSlider.onValueChanged.RemoveListener(SceneManager.StartGame);
+        moveSlider.onValueChanged.RemoveListener(GameManager.StartGame);
     }
 
     // Prevent SceneManager.StartGame multiple call
     public void SliderRemoveListener()
     {
-        moveSlider.onValueChanged.RemoveListener(SceneManager.StartGame);
+        moveSlider.onValueChanged.RemoveListener(GameManager.StartGame);
     }
 
     public void WoodUpdate()
@@ -56,7 +60,13 @@ public class UiManager : MonoBehaviour
     // Endgame UI
     public void EndGame()
     {
-        EndgameUi.SetActive(true);
         moveSlider.gameObject.SetActive(false);
+
+        // End game screen
+        EndgameUi.SetActive(true);
+        NewScore.SetActive(GameManager.IsNeedToShowNewScore());
+        currentScore.text = "—чет: \n" + GameManager.thisGameScore.ToString();
+        bestScore.text = "Ћучший: \n WIP YA games" + GameManager.tempUntillNoYaGames.ToString();
     }
+
 }
