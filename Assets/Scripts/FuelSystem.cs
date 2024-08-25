@@ -12,15 +12,19 @@ public class FuelSystem : MonoBehaviour
         {
             case "Fuel_1":
                 BeahaveDependOnCount(1);
+                Destroy(other.gameObject);
                 break;
+
             case "Fuel_3":
                 BeahaveDependOnCount(3);
+                Destroy(other.gameObject);
                 break;
+
             case "Fuel_4":
                 BeahaveDependOnCount(4);
+                Destroy(other.gameObject);
                 break;
         }
-        Destroy(other.gameObject);
     }
 
     private void BeahaveDependOnCount(int woodCount)

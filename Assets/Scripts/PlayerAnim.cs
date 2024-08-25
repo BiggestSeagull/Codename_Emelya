@@ -10,14 +10,14 @@ public class PlayerAnim : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneManager.OnSliderPressed += GameHasStarted;
+        GameManager.OnSliderPressed += GameHasStarted;
 
         // Animation of rocking on waves used as idle
         animator.SetBool("floating", true);
     }
     private void OnDisable()
     {
-        SceneManager.OnSliderPressed -= GameHasStarted;
+        GameManager.OnSliderPressed -= GameHasStarted;
     }
 
     private void GameHasStarted()

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public static class PlayerStats
 {
     public static int currentFuel = 0;
