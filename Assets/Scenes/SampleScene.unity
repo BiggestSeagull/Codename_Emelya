@@ -1864,6 +1864,7 @@ GameObject:
   - component: {fileID: 2110555288}
   - component: {fileID: 2110555290}
   - component: {fileID: 2110555289}
+  - component: {fileID: 2110555291}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: SceneManager
@@ -1917,6 +1918,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5158c2a9db7bb984793d8f16b5e3fe4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2110555291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110555286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cae7505614f3664ca0252445244e7b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  balalaikaTiles: {fileID: 1823994687306720444, guid: d51019fd590c07049946a8cf2d19d1d7, type: 3}
+  broomstickTiles: {fileID: 6635219644355600431, guid: 8cde96dc0db62c54b9d7277d613fbbc6, type: 3}
+  doorTiles: {fileID: 4568738321995161528, guid: 6fc60d9d5789e5049a5fe4ae73ef535b, type: 3}
+  handkerchiefTiles: {fileID: 2074615643773930016, guid: 22795e2d8c4a01643a2e6d21c912688f, type: 3}
+  holderTiles: {fileID: 6734107784080835803, guid: ed70b42db35cbd843bfae24aa92a2d83, type: 3}
+  ledderTiles: {fileID: 7374316620608616042, guid: 6e2e2b38c09e67140b3e548992477a85, type: 3}
+  rugTiles: {fileID: 1942061506296726829, guid: 4d29ec5e9b1e5bc4da175ebe0a035b54, type: 3}
 --- !u!1001 &2037358344332243267
 PrefabInstance:
   m_ObjectHideFlags: 0

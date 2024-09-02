@@ -18,8 +18,34 @@ namespace YG
 
         // Ваши сохранения
 
-        // ...
+        #region Puzzles
+        // Balalaika
+        public bool[] balalaikaTiles = new bool[6];
 
+        // Broomstick
+        public bool[] broomstickTiles = new bool[6];
+
+
+        // Door
+        public bool[] doorTiles = new bool[6];
+
+
+        // Handkerchief
+        public bool[] handkerchiefTiles = new bool[6];
+
+
+        // Holder
+        public bool[] holderTiles = new bool[6];
+
+
+        // Ledder
+        public bool[] ledderTiles = new bool[6];
+
+
+        // Rug
+        public bool[] rugTiles = new bool[6];
+
+        #endregion
 
 
 
