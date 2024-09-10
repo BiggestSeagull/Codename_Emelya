@@ -4,39 +4,25 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
-    // Balalaika
-    public GameObject[] balalaikaTiles;
-    private bool[] IsBalalaikaGot = new bool[6];
+    // Instead of making duplicates
+    [System.Serializable]
+    public class Puzzle
+    {
+        public string name;
+        public GameObject parent;
+        public GameObject[] tiles;
+        public bool[] isTileAcquired = new bool[6];
+    }
 
-    // Broomstick
-    public GameObject broomstickTiles;
-    private bool[] IsBroomstickGot = new bool[6];
+    [SerializeField] private Puzzle[] puzzles; // Creating
 
-    // Door
-    public GameObject doorTiles;
-    private bool[] IsDoorGot = new bool[6];
-
-    // Handkerchief
-    public GameObject handkerchiefTiles;
-    private bool[] IsHandkerchiefGot = new bool[6];
-
-    // Holder
-    public GameObject holderTiles;
-    private bool[] IsHolderGot = new bool[6];
-
-    // Ledder
-    public GameObject ledderTiles;
-    private bool[] IsLedderGot = new bool[6];
-
-    // Rug
-    public GameObject rugTiles;
-    private bool[] IsRugGot = new bool[6];
-
+    private int currentPuzzleIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Init all tiles on start
+        LoadTileStates(); //FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX запрос до инициализвации sdk
     }
 
     // Update is called once per frame
@@ -45,33 +31,62 @@ public class PuzzleManager : MonoBehaviour
         
     }
 
-    // Call this with string of object to check are tile acquired
-    private void IsTilesAcquired(string setToCheck)
+    // Switch to the next puzzle with UI button
+    public void NextPuzzle()
     {
-        switch (setToCheck)
+        currentPuzzleIndex = (currentPuzzleIndex + 1) % puzzles.Length;
+        SwitchPuzzle(currentPuzzleIndex);
+    }
+
+    public void PrevPuzzle()
+    {
+        currentPuzzleIndex = (currentPuzzleIndex - 1 + puzzles.Length) % puzzles.Length;
+        SwitchPuzzle(currentPuzzleIndex);
+    }
+
+    // Switch puzzle backend
+    private void SwitchPuzzle(int targetPuzzleIndex)
+    {
+        Puzzle currentPuzzle = puzzles[targetPuzzleIndex];
+        bool[] isTileAcquired = IsTilesAcquired(currentPuzzle.name);
+
+        for (int i = 0; i < currentPuzzle.tiles.Length; i++)
         {
-            case "balalaika":
-                IsBalalaikaGot = YG_Saves.LoadBalalaika();
-                break;
-            case "broomstick":
-                IsBroomstickGot = YG_Saves.LoadBroomstick();
-                break;
-            case "door":
-                IsDoorGot = YG_Saves.LoadDoor();
-                break;
-            case "handkerchief":
-                IsHandkerchiefGot = YG_Saves.LoadHandkerchief();
-                break;
-            case "holder":
-                IsHolderGot = YG_Saves.LoadHolder();
-                break;
-            case "ledder":
-                IsLedderGot = YG_Saves.LoadLedder();
-                break;
-            case "rug":
-                IsRugGot = YG_Saves.LoadRug();
-                break;
+            currentPuzzle.tiles[i].SetActive(isTileAcquired[i]);
         }
     }
 
+    // Check are tiles acquired
+    private bool[] IsTilesAcquired(string setName)
+    {
+        switch (setName)
+        {
+            case "balalaika":
+                return YG_Saves.LoadBalalaika();
+            case "broomstick":
+                return YG_Saves.LoadBroomstick();
+            case "door":
+                return YG_Saves.LoadDoor();
+            case "handkerchief":
+                return YG_Saves.LoadHandkerchief();
+            case "holder":
+                return YG_Saves.LoadHolder();
+            case "ledder":
+                return YG_Saves.LoadLedder();
+            case "rug":
+                return YG_Saves.LoadRug();
+            default:
+                Debug.LogError("Wrong puzzle set name");
+                return new bool[6];
+        }
+    }
+
+    // Load start states of tiles
+    private void LoadTileStates()
+    {
+        foreach (var puzzle in puzzles)
+        {
+            puzzle.isTileAcquired = IsTilesAcquired(puzzle.name);
+        }
+    }
 }
