@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using YG;
 
 public class UiManager : MonoBehaviour
 {
+    private PuzzleManager PM;
+
+
     // UI slider for movement
     public Slider moveSlider;
 
@@ -17,14 +21,27 @@ public class UiManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bestScore;
     [SerializeField] private Button newGame;
 
+    // Puzzle menu UI
+    [SerializeField] private Button openPuzzleMenu;
+    [SerializeField] private Button closePuzzleMenu;
+    [SerializeField] private Button nextPuzzle;
+    [SerializeField] private Button prevPuzzle;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        PM = GetComponent<PuzzleManager>();
+
         currentWood.text = "ƒрова: \n" + PlayerStats.currentFuel.ToString();
 
         // To ensure correct state
         EndgameUi.SetActive(false);
         NewScore.SetActive(false);
+
+        // Buttons
+        nextPuzzle.onClick.AddListener(delegate { PM.NextPuzzle(); });
+        prevPuzzle.onClick.AddListener(delegate { PM.PrevPuzzle(); });
     }
 
     // Update is called once per frame
@@ -32,6 +49,8 @@ public class UiManager : MonoBehaviour
     {
         
     }
+
+    
 
     private void OnEnable()
     {
@@ -68,5 +87,6 @@ public class UiManager : MonoBehaviour
         currentScore.text = "—чет: \n" + GameManager.thisGameScore.ToString();
         bestScore.text = "Ћучший: \n WIP YA games" + GameManager.tempUntillNoYaGames.ToString();
     }
+
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -21,8 +22,7 @@ public class PuzzleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Init all tiles on start
-        LoadTileStates(); //FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX запрос до инициализвации sdk
+
     }
 
     // Update is called once per frame
@@ -30,6 +30,20 @@ public class PuzzleManager : MonoBehaviour
     {
         
     }
+
+    #region Yandex
+    // Подписываемся на событие GetDataEvent в OnEnable
+    private void OnEnable() => YandexGame.GetDataEvent += GetData;
+
+    // Отписываемся от события GetDataEvent в OnDisable
+    private void OnDisable() => YandexGame.GetDataEvent -= GetData;
+
+    public void GetData()
+    {
+        // Init all tiles on start
+        LoadTileStates();
+    }
+    #endregion
 
     // Switch to the next puzzle with UI button
     public void NextPuzzle()
@@ -44,15 +58,23 @@ public class PuzzleManager : MonoBehaviour
         SwitchPuzzle(currentPuzzleIndex);
     }
 
-    // Switch puzzle backend
+    // Switch puzzle
     private void SwitchPuzzle(int targetPuzzleIndex)
     {
-        Puzzle currentPuzzle = puzzles[targetPuzzleIndex];
-        bool[] isTileAcquired = IsTilesAcquired(currentPuzzle.name);
+        // Disable neighboring puzzles
+        puzzles[targetPuzzleIndex -1].parent.SetActive(false);
+        puzzles[targetPuzzleIndex + 1].parent.SetActive(false);
 
-        for (int i = 0; i < currentPuzzle.tiles.Length; i++)
+
+        Puzzle currentPuzzle = puzzles[targetPuzzleIndex];              // Getting current puzzle
+        currentPuzzle.parent.SetActive(true);                           // Enabling parent gameObject
+        bool[] isTileAcquired = IsTilesAcquired(currentPuzzle.name);    // Understanding which tiles are acquired
+        
+        int i = 0;  // Counter, max value = 6
+        foreach (GameObject tile in currentPuzzle.tiles)    // Iterating tiles of puzzle
         {
-            currentPuzzle.tiles[i].SetActive(isTileAcquired[i]);
+            tile.SetActive(isTileAcquired[i]);              // Enabling tile gameObject if it`s got
+            i++;                                            // Counter +1
         }
     }
 
