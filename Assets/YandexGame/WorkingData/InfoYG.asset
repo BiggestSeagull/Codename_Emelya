@@ -36,7 +36,7 @@ MonoBehaviour:
   flush: 0
   localSaveSync: 1
   saveCloudInterval: 5
-  saveOnQuitGame: 0
+  saveOnQuitGame: 1
   quitGameParameters:
     objectName: YandexGame
     methodName: _SaveProgress
@@ -191,8 +191,8 @@ MonoBehaviour:
     name: TranslateCSV
   languages:
     ru: 1
-    en: 1
-    tr: 1
+    en: 0
+    tr: 0
     az: 0
     be: 0
     he: 0
@@ -221,6 +221,38 @@ MonoBehaviour:
     defaultFont: []
     ru: []
     en: []
+    tr: []
+    az: []
+    be: []
+    he: []
+    hy: []
+    ka: []
+    et: []
+    fr: []
+    kk: []
+    ky: []
+    lt: []
+    lv: []
+    ro: []
+    tg: []
+    tk: []
+    uk: []
+    uz: []
+    es: []
+    pt: []
+    ar: []
+    id: []
+    ja: []
+    it: []
+    de: []
+    hi: []
+  fontsTMP:
+    defaultFont:
+    - {fileID: 11400000, guid: bdae1bd41427cb24fa9c7d0f12210c6f, type: 2}
+    ru:
+    - {fileID: 11400000, guid: bdae1bd41427cb24fa9c7d0f12210c6f, type: 2}
+    en:
+    - {fileID: 11400000, guid: bdae1bd41427cb24fa9c7d0f12210c6f, type: 2}
     tr: []
     az: []
     be: []
@@ -305,7 +337,7 @@ MonoBehaviour:
   metricaEnable: 0
   metricaCounterID: 0
   debug: 1
-  archivingBuild: 1
+  archivingBuild: 0
   logoImageFormat: 1
   backgroundImageFormat: 3
   pixelRatioEnable: 0
